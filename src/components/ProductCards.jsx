@@ -1,11 +1,8 @@
+import React from "react";
 
-import React from 'react'
-
-const ProductCards = ({ product }) => {
-
+const ProductCards = ({ product, setCartItems }) => {
   return (
     <div className="bg-[#111827] border-2 cursor-pointer border-gray-800 rounded-2xl overflow-hidden hover:border-indigo-500 transition duration-300 group">
-
       {/* Product Image */}
       <div className="bg-white h-64 flex items-center justify-center p-6">
         <img
@@ -17,7 +14,6 @@ const ProductCards = ({ product }) => {
 
       {/* Product Details */}
       <div className="p-5">
-
         {/* Category */}
         <p className="text-indigo-400 text-xs uppercase tracking-widest mb-2">
           {product.category}
@@ -36,9 +32,7 @@ const ProductCards = ({ product }) => {
         {/* Rating */}
         <div className="flex items-center gap-2 mt-4">
           <span className="text-yellow-400">★</span>
-          <span className="text-white text-sm">
-            {product.rating.rate}
-          </span>
+          <span className="text-white text-sm">{product.rating.rate}</span>
           <span className="text-gray-500 text-sm">
             ({product.rating.count} reviews)
           </span>
@@ -46,18 +40,18 @@ const ProductCards = ({ product }) => {
 
         {/* Price and Cart */}
         <div className="flex items-center justify-between mt-5">
-          <h3 className="text-2xl font-bold text-white">
-            ${product.price}
-          </h3>
+          <h3 className="text-2xl font-bold text-white">${product.price}</h3>
 
-          <button className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer">
+          <button
+            onClick={() => setCartItems((prev) => [...prev, product])}
+            className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
+          >
             Add to Cart
           </button>
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCards
+export default ProductCards;
