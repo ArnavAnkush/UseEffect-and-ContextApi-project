@@ -1,4 +1,8 @@
-function Navbar({ setIsCartOpen }) {
+import { useContext } from "react";
+import { MyStore } from "../contexts/MyContext";
+
+function Navbar() {
+  let { setIsCartOpen } = useContext(MyStore);
   return (
     <nav className="flex items-center justify-between px-12 py-6 bg-[#111827] border-b border-gray-800">
       {/* Logo */}

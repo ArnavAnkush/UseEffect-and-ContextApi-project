@@ -1,14 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import ProductCards from "./components/ProductCards";
 import CartScreen from "./pages/CartScreen";
+import { MyStore } from "./contexts/MyContext";
 
 const App = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  let { isCartOpen } = useContext(MyStore);
   const [productsData, setProductsData] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-
   const getProductsData = async () => {
     try {
       let res = await axios.get("https://fakestoreapi.com/products");
@@ -23,22 +22,16 @@ const App = () => {
   }, []);
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white flex flex-col gap-8">
-      <Navbar setIsCartOpen={setIsCartOpen} />
+      <Navbar />
 
       {isCartOpen ? (
         <div>
-          <CartScreen cartItems={cartItems} />
+          <CartScreen />
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-5">
           {productsData.map((elem) => {
-            return (
-              <ProductCards
-                key={elem.id}
-                product={elem}
-                setCartItems={setCartItems}
-              />
-            );
+            return <ProductCards key={elem.id} product={elem} />;
           })}
         </div>
       )}
