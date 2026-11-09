@@ -16,9 +16,13 @@ export const ContextProvider = ({ children }) => {
 
   const decrementQuantity = (id) => {
     setCartItems((prev) => {
-      return prev.map((val) => {
-        return val.id === id ? { ...val, quantity: val.quantity - 1 } : val;
-      });
+      return prev
+        .map((val) => {
+          return val.id === id ? { ...val, quantity: val.quantity - 1 } : val;
+        })
+        .filter((val) => {
+          return val.quantity > 0;
+        });
     });
   };
 
