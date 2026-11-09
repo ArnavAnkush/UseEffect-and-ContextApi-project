@@ -6,7 +6,7 @@ import CartScreen from "./pages/CartScreen";
 import { MyStore } from "./contexts/MyContext";
 
 const App = () => {
-  let { isCartOpen } = useContext(MyStore);
+  let { isCartOpen, cartItems } = useContext(MyStore);
   const [productsData, setProductsData] = useState([]);
   const getProductsData = async () => {
     try {
@@ -31,7 +31,10 @@ const App = () => {
       ) : (
         <div className="grid grid-cols-4 gap-5">
           {productsData.map((elem) => {
-            return <ProductCards key={elem.id} product={elem} />;
+            let isInCart = cartItems.find((val) => val.id === elem.id);
+            return (
+              <ProductCards key={elem.id} product={elem} isInCart={isInCart} />
+            );
           })}
         </div>
       )}

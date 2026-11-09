@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { MyStore } from "../contexts/MyContext";
 
-const ProductCards = ({ product }) => {
+const ProductCards = ({ product, isInCart }) => {
   let { setCartItems } = useContext(MyStore);
 
   const addToCart = () => {
@@ -50,12 +50,18 @@ const ProductCards = ({ product }) => {
         <div className="flex items-center justify-between mt-5">
           <h3 className="text-2xl font-bold text-white">${product.price}</h3>
 
-          <button
-            onClick={addToCart}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
-          >
-            Add to Cart
-          </button>
+          {isInCart ? (
+            <button>
+              <span>+</span> <span>1</span> <span>-</span>
+            </button>
+          ) : (
+            <button
+              onClick={addToCart}
+              className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>
